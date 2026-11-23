@@ -1,0 +1,17 @@
+﻿<h1>UEH Admin Dashboard</h1>
+<p>Total: {{ total }} | Open: {{ open_count }} | In Progress: {{ in_progress_count }} | Resolved: {{ resolved_count }}</p>
+
+<h2>Recent Requests</h2>
+<ul>
+{% for r in recent_requests %}
+  <li>{{ r.category }} - {{ r.status }} - {{ r.client.username }}</li>
+{% empty %}<li>No requests yet</li>{% endfor %}
+</ul>
+
+<h2>Opportunities + Applications</h2>
+<ul>
+{% for o in opportunities %}
+  <li>{{ o.title }} - {{ o.app_count }} applications</li>
+{% empty %}<li>No opportunities yet</li>{% endfor %}
+</ul>
+<a href="/">Back Home</a>

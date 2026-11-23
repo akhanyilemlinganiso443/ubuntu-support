@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>UBUNTU - Community Help</title>
+<style>
+  body {
+    background-color: #E8F5E9;
+    font-family: Arial, sans-serif;
+    margin: 0; padding: 0;
+  }
+  .header {
+    background-color: #E65100;
+    color: white; padding: 30px; text-align: center;
+  }
+  .header h1 { margin: 0; font-size: 36px; }
+  .container { max-width: 700px; margin: 20px auto; padding: 0 15px; }
+  .card {
+    background: white; border-radius: 12px;
+    padding: 15px; margin: 12px 0;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  }
+  .form-box { background: white; border-radius: 12px; padding: 20px; }
+  input, textarea, select {
+    width: 100%; padding: 10px; margin: 5px 0 12px 0;
+    border: 1px solid #ccc; border-radius: 8px; box-sizing: border-box;
+  }
+  .btn {
+    background: #2E7D32; color: white; border: none;
+    padding: 12px 24px; border-radius: 8px; cursor: pointer; font-size: 16px; width: 100%;
+  }
+  .badge { background: #E65100; color: white; padding: 3px 10px; border-radius: 20px; font-size: 12px; }
+  a { color: #E65100; }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>🤝 UBUNTU</h1>
+  <p>I am because we are - Community Help in East London</p>
+</div>
+
+<div class="container">
+  <div class="form-box">
+    <h2>Request Help</h2>
+    <form method="post">
+      {% csrf_token %}
+      <label>Category:</label>
+      <input type="text" name="category" placeholder="e.g. Plumbing, Electrical, Tutoring" required>
+      <label>Description:</label>
+      <textarea name="description" placeholder="What do you need? Where in East London?" required rows="3"></textarea>
+      <label>Urgency:</label>
+      <select name="urgency">
+        <option value="LOW">Low</option>
+        <option value="MEDIUM" selected>Medium</option>
+        <option value="HIGH">High</option>
+        <option value="URGENT">Urgent</option>
+      </select>
+      <button class="btn" type="submit">Post Request</button>
+    </form>
+  </div>
+
+  <h2>Latest Service Requests</h2>
+  {% for r in requests %}
+    <div class="card">
+      <strong>{{ r.category }}</strong> <span class="badge">{{ r.status }} • {{ r.urgency }}</span><br><br>
+      {{ r.description }}<br><br>
+      <small>By {{ r.client }} | {{ r.created_at }}</small>
+    </div>
+  {% empty %}
+    <p>No requests yet.</p>
+  {% endfor %}
+
+  <h2>Latest Opportunities</h2>
+  {% for o in opportunities %}
+    <div class="card"><strong>{{ o }}</strong></div>
+  {% empty %}
+    <p>No opportunities yet.</p>
+  {% endfor %}
+
+  <p style="text-align:center;"><a href="/admin/">Go to Admin</a> | <a href="/api/requests/">View API</a></p>
+</div>
+</body>
+</html>
