@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 
-const API = 'http://127.0.0.1:8000/api/requests/' // <-- For step 3, we will change this one line to your online Django URL
+const API = `${import.meta.env.VITE_API_URL || 'https://ubuntu-support.onrender.com'}/api/requests/`
 
 const inputStyle = { width: '100%', padding: '13px', marginBottom: '12px', borderRadius: '10px', border: '1px solid #d1d5db', boxSizing: 'border-box', fontSize: '14px', outline: 'none' }
 const cardBtn = { background: '#111827', color: 'white', padding: '11px', border: 'none', borderRadius: '8px', cursor: 'pointer', width: '100%', fontWeight: '700' }
@@ -49,11 +49,13 @@ function App() {
     else { setMessage('Failed to submit') }
   }
 
-  const applyFor = async (item, cat) => {
+ const applyFor = async (item, cat) => {
+  try {
     const res = await fetch(API, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ title: item.title, description: `Applied for: ${item.desc}`, category: cat, status: 'OPEN' }) })
-    if (res.ok) { load(); setMessage(`✅ Applied for ${item.title}!`); setView('all') }
-    else { setMessage('Failed to apply') }
-  }
+    if (res.ok) { load(); setMessage(`✅ Applied for ${item.title}! Check My Requests below.`); }
+    else { setMessage('Failed to apply - check backend is Live on Render') }
+  } catch (e) { setMessage('Could not reach backend - check Vercel env var') }
+}
 
   const doRegister = (e) => {
     e.preventDefault()
