@@ -23,7 +23,7 @@ function App() {
   const [description, setDescription] = useState('')
   const [category, setCategory] = useState('Business Support')
   const [message, setMessage] = useState('')
-  const [user, setUser] = useState(null)
+  const [user, setUser] = useState({ name: 'Guest' })
   const [page, setPage] = useState('home')
   const [loginName, setLoginName] = useState('')
   const [loginPass, setLoginPass] = useState('')
@@ -89,7 +89,7 @@ function App() {
     else setRequests(prev => prev.map(x => x.id === r.id ? { ...x, status: next } : x))
   }
 
-  if (page === 'login' || page === 'register' || !user) {
+  if (page === 'login' || page === 'register') {
     return (
       <div style={{ minHeight: '100vh', background: 'linear-gradient(160deg, #0f766e 0%, #14b8a6 35%, #eef2f5 100%)', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '20px', fontFamily: 'sans-serif' }}>
         <div style={{ background: 'white', width: '100%', maxWidth: '420px', padding: '32px', borderRadius: '20px', boxShadow: '0 20px 50px rgba(0,0,0,0.25)', textAlign: 'center' }}>
@@ -147,7 +147,7 @@ function App() {
       <div style={{ maxWidth: '920px', margin: '0 auto' }}>
         <div style={{ background: 'linear-gradient(90deg, #0f766e, #14b8a6)', padding: '22px', borderRadius: '16px', color: 'white', display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px' }}>
           <div><h2 style={{ margin: '0', color: 'white', lineHeight: '1.2' }}>UBUNTU Support</h2><p style={{ margin: '4px 0 0', opacity: 0.9, fontSize: '14px' }}>Hi {user.name}! How can we help today?</p></div>
-          <button onClick={() => setUser(null)} style={{ background: 'rgba(255,255,255,0.2)', color: 'white', border: 'none', padding: '9px 14px', borderRadius: '8px', cursor: 'pointer', fontWeight: '700' }}>Logout</button>
+        <button onClick={() => setUser({ name: 'Guest' })} style={{ background: 'rgba(255,255,255,0.2)', color: 'white', border: 'none', padding: '9px 14px', borderRadius: '8px', cursor: 'pointer', fontWeight: '700' }}>Logout</button>  
         </div>
 
         {/* 1. DASHBOARD */}
