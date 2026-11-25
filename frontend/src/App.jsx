@@ -147,7 +147,7 @@ function App() {
       <div style={{ maxWidth: '920px', margin: '0 auto' }}>
         <div style={{ background: 'linear-gradient(90deg, #0f766e, #14b8a6)', padding: '22px', borderRadius: '16px', color: 'white', display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px' }}>
           <div><h2 style={{ margin: '0', color: 'white', lineHeight: '1.2' }}>UBUNTU Support</h2><p style={{ margin: '4px 0 0', opacity: 0.9, fontSize: '14px' }}>Hi {user.name}! How can we help today?</p></div>
-        <button onClick={() => setUser({ name: 'Guest' })} style={{ background: 'rgba(255,255,255,0.2)', color: 'white', border: 'none', padding: '9px 14px', borderRadius: '8px', cursor: 'pointer', fontWeight: '700' }}>Logout</button>  
+        <button onClick={() => setPage('login')} style={{ background: 'rgba(255,255,255,0.2)', color: 'white', border: 'none', padding: '9px 14px', borderRadius: '8px', cursor: 'pointer', fontWeight: '700' }}>Logout</button> 
         </div>
 
         {/* 1. DASHBOARD */}
